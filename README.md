@@ -1,11 +1,11 @@
-# vis-prevfile
+# vis-prevfiles
 
 A plugin for **vis 0.9 with Lua support**. Switch between the last two active files or browse the files you've visited in the current session.
 
 ## Installation
 
-1. Copy `vis-prevfile.lua` to `~/.config/vis/`, or to `$XDG_CONFIG_HOME/vis/` if `XDG_CONFIG_HOME` is set.
-2. Add `require('vis-prevfile')` to your `visrc.lua` after `require('vis')`.
+1. Copy `init.lua` to `~/.config/vis/vis-prevfiles.lua`, or to `$XDG_CONFIG_HOME/vis/vis-prevfiles.lua` if `XDG_CONFIG_HOME` is set.
+2. Add `require('vis-prevfiles')` to your `visrc.lua` after `require('vis')`.
 3. Restart vis.
 
 ## Keybindings
@@ -23,7 +23,7 @@ You can also prefix `g[` and `g]` with a count. For example, `2g[` goes back two
 
 ## History
 
-The plugin keeps up to **five distinct named files** in memory, including the active file if it has a name. Change `history_limit` at the top of `vis-prevfile.lua` to set a different limit.
+The plugin keeps up to **five distinct named files** in memory, including the active file if it has a name. Change `history_limit` at the top of `init.lua` to set a different limit.
 
 When you switch files with vis commands, the file you visit moves to the front of the history. `g[` and `g]` follow the recorded order.
 
