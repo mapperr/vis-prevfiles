@@ -46,7 +46,7 @@ local function reopen_file(path)
     if path:find("[*?%[{$`;&|<>()\n]") then
         -- Vis 0.9 sends patterns to vis-open using a shell command.
         if path:find('[%s*]$') then
-            vis:info('Questo nome non può essere riaperto con :e')
+            vis:info('This filename cannot be reopened with :e')
             return
         end
         path = "'" .. path:gsub("'", [['\'']]) .. "'${0:+}"
@@ -111,7 +111,7 @@ local function switch_file()
     if target then
         jump_to(target)
     else
-        vis:info('Nessun file precedente')
+        vis:info('No previous file')
     end
     return 0
 end
@@ -127,8 +127,8 @@ vis.events.subscribe(vis.events.UI_DRAW, remember_file)
 
 local normal = vis.modes.NORMAL
 for _, key in ipairs(alternate_keys) do
-    vis:map(normal, key, switch_file, 'Alterna gli ultimi due file o torna indietro di N posizioni')
+    vis:map(normal, key, switch_file, 'Toggle between the last two files, or go back by count')
 end
 
-vis:map(normal, 'g[', function() return move_history(1) end, 'Indietro nella cronologia dei file')
-vis:map(normal, 'g]', function() return move_history(-1) end, 'Avanti nella cronologia dei file')
+vis:map(normal, 'g[', function() return move_history(1) end, 'Go back in file history')
+vis:map(normal, 'g]', function() return move_history(-1) end, 'Go forward in file history')

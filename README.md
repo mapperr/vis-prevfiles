@@ -1,32 +1,32 @@
 # vis-prevfile
 
-Plugin per **vis 0.9 con supporto Lua**. Alterna gli ultimi due file attivi e permette di scorrere i file visitati nella sessione.
+A plugin for **vis 0.9 with Lua support**. Switch between the last two active files or browse the files you've visited in the current session.
 
-## Installazione
+## Installation
 
-1. Copia `vis-prevfile.lua` in `~/.config/vis/` oppure in `$XDG_CONFIG_HOME/vis/` se hai impostato `XDG_CONFIG_HOME`.
-2. Aggiungi `require('vis-prevfile')` al tuo `visrc.lua`, dopo `require('vis')`.
-3. Riavvia vis.
+1. Copy `vis-prevfile.lua` to `~/.config/vis/`, or to `$XDG_CONFIG_HOME/vis/` if `XDG_CONFIG_HOME` is set.
+2. Add `require('vis-prevfile')` to your `visrc.lua` after `require('vis')`.
+3. Restart vis.
 
-## Tasti
+## Keybindings
 
-I tasti funzionano in modalità Normal.
+Use these keys in Normal mode.
 
-| Tasto | Azione |
+| Keys | Action |
 | --- | --- |
-| `Ctrl+6` | Alterna gli ultimi due file attivi |
-| `g[` | Indietro di una posizione, verso i file meno recenti |
-| `g]` | Avanti di una posizione, verso i file più recenti |
-| `2` poi `Ctrl+6` | Torna indietro di due posizioni nella cronologia |
+| `Ctrl+6` | Toggle between the last two active files |
+| `g[` | Go back one entry, toward older files |
+| `g]` | Go forward one entry, toward newer files |
+| `2` then `Ctrl+6` | Go back two entries |
 
-Puoi anteporre un numero anche a `g[` e `g]`. Per esempio, `2g[` torna indietro di due posizioni. Il plugin riconosce `Ctrl+6` anche quando vis lo legge come `<C-^>`.
+You can also prefix `g[` and `g]` with a count. For example, `2g[` goes back two entries. The plugin handles `Ctrl+6` whether vis reads it as `<C-6>` or `<C-^>`.
 
-## Cronologia
+## History
 
-La cronologia tiene in memoria fino a **5 file distinti**, compreso quello attivo se ha un nome. Puoi cambiare il limite modificando `history_limit` all'inizio di `vis-prevfile.lua`.
+The plugin keeps up to **five distinct named files** in memory, including the active file if it has a name. Change `history_limit` at the top of `vis-prevfile.lua` to set a different limit.
 
-Quando cambi file con i comandi di vis, il file visitato va in testa alla cronologia. `g[` e `g]` percorrono la lista nell'ordine registrato.
+When you switch files with vis commands, the file you visit moves to the front of the history. `g[` and `g]` follow the recorded order.
 
-Se apri `a.lua`, `b.lua` e `c.lua` in quest'ordine, da `c.lua` premi `g[` per tornare a `b.lua` e poi ancora `g[` per tornare a `a.lua`. Da lì, `g]` ti riporta a `b.lua`.
+Open `a.lua`, `b.lua`, and `c.lua` in that order. From `c.lua`, press `g[` to go back to `b.lua`, then press `g[` again to reach `a.lua`. Press `g]` to return to `b.lua`.
 
-Il plugin passa allo split che mostra già il file, se presente. Per riaprire un file chiuso usa `:e` con la normale protezione di vis per le modifiche non salvate.
+If the target file is already open in a split, the plugin focuses that split. Otherwise, it reopens the file with `:e`, which uses the usual vis checks for unsaved changes.
